@@ -18,6 +18,8 @@ public:
         //         it = circle.begin();
         // }
         // return circle.back();
+        
+        //Josephus Problem
         if (n==1)
             return 1;
         
