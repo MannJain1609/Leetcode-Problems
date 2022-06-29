@@ -12,7 +12,7 @@
 class Solution {
 public:
     bool findTarget(TreeNode* root, int k) {
-        deque<int> bst;
+        vector<int> bst;
         //Iterative inorder
         stack<TreeNode*> temp;
         TreeNode* curr = root;
@@ -31,16 +31,15 @@ public:
                 curr = curr->left;
             }
         }
-        while(!bst.empty())
+        int i=0,j=bst.size()-1;
+        while(i<j)
         {
-            if(bst.front() == bst.back())
-                return false;
-            if(bst.front() + bst.back() == k)
+            if(bst[i] + bst[j] == k)
                 return true;
-            if(bst.front() + bst.back() > k)
-                bst.pop_back();
+            if(bst[i] + bst[j] > k)
+                j--;
             else
-                bst.pop_front();
+                i++;
         }
         return false;
     }
