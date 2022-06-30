@@ -24,7 +24,7 @@ private:
         queue<IndexedNode>q;
         q.push({root,1});
         //Root of tree node- level 1
-        unsigned long long width = 1;
+        int width = 1;
         while(!q.empty())
         {
             int size = q.size();
@@ -46,9 +46,9 @@ private:
                     q.push({T.root->right, 2*T.index+1});
                 }
             }
-            width = max(width, last-first+1);
+            width = max(width, (int)(last-first+1));
         }
-        return (int)width;
+        return width;
     }
 public:
     int widthOfBinaryTree(TreeNode* root) {
