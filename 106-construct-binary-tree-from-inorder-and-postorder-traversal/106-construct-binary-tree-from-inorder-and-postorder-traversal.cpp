@@ -12,7 +12,7 @@
 class Solution {
 private:
     int postStart = 0;
-    TreeNode* BuildTree(vector<int>& postorder, vector<int>& inorder, map<int,int>& Inorder,
+    TreeNode* BuildTree(vector<int>& postorder, vector<int>& inorder, unordered_map<int,int>& Inorder,
                         int postEnd, int inStart, int inEnd)
     {
         if(postStart<=postEnd)
@@ -36,7 +36,7 @@ public:
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
         int postSize = postorder.size();
         int inSize = inorder.size();
-        map<int,int>Inorder;
+        unordered_map<int,int>Inorder;
         for(int i=0; i<inSize; i++)
         {
             Inorder[inorder[i]] = i;
