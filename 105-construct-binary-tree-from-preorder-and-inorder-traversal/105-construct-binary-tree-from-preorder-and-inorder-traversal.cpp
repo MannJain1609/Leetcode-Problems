@@ -13,7 +13,7 @@ class Solution {
 private:
     int preStart = 0;
     TreeNode* BuildTree(vector<int>& preorder, vector<int>& inorder, map<int,int>& Inorder,
-                        TreeNode* root, int preEnd, int inStart, int inEnd)
+                        int preEnd, int inStart, int inEnd)
     {
         if(preStart<=preEnd)
         {
@@ -21,17 +21,16 @@ private:
                 //preStart--;
                 return NULL;
             }
-            TreeNode* ins = new TreeNode(preorder[preStart]);
-            if(root == NULL)
-              root = ins;
+            TreeNode* root = new TreeNode(preorder[preStart]);
             int index = Inorder[preorder[preStart]];
             preStart++;
             root->left = BuildTree(preorder,inorder,Inorder,
-                                   root->left,preEnd,inStart, index-1);
+                                   preEnd,inStart, index-1);
             root->right = BuildTree(preorder,inorder,Inorder,
-                                    root->right,preEnd,index+1,inEnd);
+                                    preEnd,index+1,inEnd);
+            return root;
         }
-        return root;
+        return NULL;
     }
 public:
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
@@ -42,8 +41,6 @@ public:
         {
             Inorder[inorder[i]] = i;
         }
-        TreeNode* root = new TreeNode(preorder[0]);
-        BuildTree(preorder,inorder,Inorder,root, preSize-1,0,inSize-1);
-        return root;
+        return BuildTree(preorder,inorder,Inorder,preSize-1,0,inSize-1);
     }
 };
