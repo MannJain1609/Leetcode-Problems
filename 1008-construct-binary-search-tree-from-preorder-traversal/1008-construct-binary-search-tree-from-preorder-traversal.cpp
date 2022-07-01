@@ -10,39 +10,22 @@
  * };
  */
 class Solution {
-private:
-    int preStart = 0;
-    TreeNode* BuildTree(vector<int>& preorder, vector<int>& inorder, unordered_map<int,int>& Inorder,
-                        int preEnd, int inStart, int inEnd)
-    {
-        if(preStart<=preEnd)
-        {
-            if(inStart > inEnd) {
-                //preStart--;
-                return NULL;
-            }
-            TreeNode* root = new TreeNode(preorder[preStart]);
-            int index = Inorder[preorder[preStart]];
-            preStart++;
-            root->left = BuildTree(preorder,inorder,Inorder,
-                                   preEnd,inStart, index-1);
-            root->right = BuildTree(preorder,inorder,Inorder,
-                                    preEnd,index+1,inEnd);
-            return root;
-        }
-        return NULL;
+    TreeNode* buildBST(vector<int>& preorder, int preStart, int preEnd) {
+        if(preStart > preEnd)
+            return NULL;
+        TreeNode* root = new TreeNode(preorder[preStart]);
+        int val = preorder[preStart];
+        int index = preStart+1;
+        while(index<=preEnd && preorder[index]<val)
+            index++;
+        //int count = index-preStart-1;
+        root->left = buildBST(preorder,preStart+1,index-1);
+        root->right = buildBST(preorder,index,preEnd);
+        return root;
     }
 public:
     TreeNode* bstFromPreorder(vector<int>& preorder) {
-        int root_val = preorder[0];
-        vector<int> inorder = preorder;
-        sort(inorder.begin(), inorder.end());
         int size = preorder.size();
-        unordered_map<int,int>Inorder;
-        for(int i=0; i<size; i++)
-        {
-            Inorder[inorder[i]] = i;
-        }
-        return BuildTree(preorder,inorder,Inorder,size-1,0,size-1);
+        return buildBST(preorder,0,size-1);
     }
 };
