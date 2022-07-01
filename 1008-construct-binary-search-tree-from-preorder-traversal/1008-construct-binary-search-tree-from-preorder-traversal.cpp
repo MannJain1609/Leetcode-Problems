@@ -10,22 +10,40 @@
  * };
  */
 class Solution {
-    TreeNode* buildBST(vector<int>& preorder, int preStart, int preEnd) {
-        if(preStart > preEnd)
-            return NULL;
-        TreeNode* root = new TreeNode(preorder[preStart]);
-        int val = preorder[preStart];
-        int index = preStart+1;
-        while(index<=preEnd && preorder[index]<val)
-            index++;
-        //int count = index-preStart-1;
-        root->left = buildBST(preorder,preStart+1,index-1);
-        root->right = buildBST(preorder,index,preEnd);
+    TreeNode* buildBST(vector<int>& preorder, int size) {
+        TreeNode* root = new TreeNode(preorder[0]);
+        for(int i=1; i<size; i++)
+        {
+            int val = preorder[i];
+            TreeNode* temp = root;
+            TreeNode* ins = new TreeNode(val);
+            while(true)
+            {
+                if(temp->val < val)
+                {
+                    if(temp->right)
+                        temp = temp->right;
+                    else {
+                        temp->right = ins;
+                        break;
+                    }
+                }
+                else
+                {
+                    if(temp->left)
+                        temp = temp->left;
+                    else {
+                        temp->left = ins;
+                        break;
+                    }
+                }
+            }
+        }
         return root;
     }
 public:
     TreeNode* bstFromPreorder(vector<int>& preorder) {
         int size = preorder.size();
-        return buildBST(preorder,0,size-1);
+        return buildBST(preorder,size);
     }
 };
