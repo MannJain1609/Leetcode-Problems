@@ -23,7 +23,7 @@ private:
         //cout<<sum<<" ";
         maxSum = max(maxSum,root->val);
         maxSum = max(maxSum, max(root->val+left+right,max(root->val+left,root->val+right)));
-        root->val = sum;
+        //root->val = sum;
         return sum;
     }
 public:
