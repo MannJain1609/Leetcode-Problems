@@ -11,6 +11,7 @@
  */
 class Solution {
 private:
+    //Postorder
     int maxSum = INT_MIN;
     int PathSum(TreeNode* root)
     {
