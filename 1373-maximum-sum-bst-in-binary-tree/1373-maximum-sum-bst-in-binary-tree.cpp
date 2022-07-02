@@ -41,6 +41,7 @@ public:
         IndexedNode Right = MaxSumBST(root->right);
         if(!Left.BST || !Right.BST)
             return {root,root->val,root->val,false};
+        //Subtree is a BST
         int minimum = root->val, maximum = root->val;
         bool isBST = true;
         if(Left.root) {
