@@ -25,17 +25,22 @@ public:
     }
 };
     //empty BST, ans will never be negative
+    //Postorder
     int max_sum = 0;
     IndexedNode MaxSumBST(TreeNode* root)
     {
+        //Empty BST
         if(root == NULL)
             return {root,INT_MIN,INT_MAX,true};
+        //leaf node is a BST
         if(root->left == NULL && root->right == NULL) {
             max_sum = max(max_sum,root->val);
             return {root,root->val,root->val,true};
         }
         IndexedNode Left = MaxSumBST(root->left);
         IndexedNode Right = MaxSumBST(root->right);
+        if(!Left.BST || !Right.BST)
+            return {root,root->val,root->val,false};
         int minimum = root->val, maximum = root->val;
         bool isBST = true;
         if(Left.root) {
@@ -56,6 +61,7 @@ public:
         if(root->right)
             root->val+= root->right->val;
         max_sum = max(max_sum,root->val);
+        //cout<<"val: "<<root->val<<" ";
         return temp;
     }
 public:
