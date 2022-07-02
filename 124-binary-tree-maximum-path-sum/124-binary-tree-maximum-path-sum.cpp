@@ -17,14 +17,10 @@ private:
         if(root == NULL)
             return 0;
 
-        int left = PathSum(root->left);
-        int right = PathSum(root->right);
-        int sum = max(root->val,root->val+max(left,right));
-        //cout<<sum<<" ";
-        maxSum = max(maxSum,root->val);
-        maxSum = max(maxSum, max(root->val+left+right,max(root->val+left,root->val+right)));
-        //root->val = sum;
-        return sum;
+        int left = max(0,PathSum(root->left));
+        int right = max(0,PathSum(root->right));
+        maxSum = max(maxSum, root->val+left+right);
+        return root->val+max(left,right);
     }
 public:
     int maxPathSum(TreeNode* root) {
