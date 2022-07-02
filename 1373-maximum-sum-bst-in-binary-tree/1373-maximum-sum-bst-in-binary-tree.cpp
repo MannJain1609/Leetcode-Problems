@@ -45,12 +45,12 @@ public:
         bool isBST = true;
         if(Left.root) {
             minimum = min(minimum,Left.Min);
-            if(!Left.BST || root->val <= Left.Max)
+            if(root->val <= Left.Max)
                 isBST = false;
         }
         if(Right.root) {
             maximum = max(maximum,Right.Max);
-            if(!Right.BST || root->val >= Right.Min)
+            if(root->val >= Right.Min)
                 isBST = false;
         }
         IndexedNode temp = {root,minimum,maximum,isBST};
