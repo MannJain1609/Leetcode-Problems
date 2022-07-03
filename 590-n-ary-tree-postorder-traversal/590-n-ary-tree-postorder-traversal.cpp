@@ -27,15 +27,13 @@ private:
         for(int i=0; i<root->children.size(); i++)
         {
             postorder(ans,root->children[i]);
-            ans.push_back(root->children[i]->val);
         }
+        ans.push_back(root->val);
     }
 public:
     vector<int> postorder(Node* root) {
         vector<int>ans;
         postorder(ans,root);
-        if(root)
-            ans.push_back(root->val);
         return ans;
     }
 };
