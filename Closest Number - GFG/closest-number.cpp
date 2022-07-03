@@ -11,26 +11,14 @@ class Solution {
         int diff1,diff2,diff3,a,b,c;
         if(M == 1 || M==-1)
             return N;
-        //M > N
-        if(x==0)
-        {
-            a = 0;
-            b = M;
-            c = -M;
-            diff1 = abs(N - a);
-            diff2 = abs(N - b);
-            diff3 = abs(N - c);
-        }
-        else
-        {
-            a = x*M;
-            b = (x-1)*M;
-            c = (x+1)*M;
-            diff1 = abs(N-a);
-            diff2 = abs(N-b);
-            diff3 = abs(N-c);
-        }
-        
+            
+        a = x*M;
+        b = (x-1)*M;
+        c = (x+1)*M;
+        diff1 = abs(N-a);
+        diff2 = abs(N-b);
+        diff3 = abs(N-c);
+    
         
         if(diff1 > diff2)
         {
