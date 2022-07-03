@@ -15,19 +15,19 @@ private:
     int getHeight(TreeNode* root) {
         if(root == NULL)
             return 0;
-        return 1 + max(getHeight(root->left), getHeight(root->right));
-    }
-    void preorder(TreeNode* root) {
-        if(root == NULL || !isbalanced)
-            return;
-        if(abs(getHeight(root->left)-getHeight(root->right))>=2)
+        int left = getHeight(root->left);
+        int right = getHeight(root->right);
+        if(abs(left-right)>=2)
+        {
             isbalanced = false;
-        preorder(root->left);
-        preorder(root->right);
+            return 0;
+        }
+        return 1 + max(left, right);
     }
+    
 public:
     bool isBalanced(TreeNode* root) {
-        preorder(root);
+        getHeight(root);
         return isbalanced;
     }
 };
