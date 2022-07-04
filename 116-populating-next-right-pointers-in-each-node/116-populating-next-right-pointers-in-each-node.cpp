@@ -26,35 +26,29 @@ private:
 //         TreeNode* right = helper(root->right);
 //         if(left)
 //             left->next = right;
-        
 //     }
     
-    void bfs(Node* root) {
+    void connect(Node* root, Node* parent) {
         if(root == NULL)
             return;
-        queue<Node*> q;
-        q.push(root);
-        while(!q.empty())
-        {
-            int size = q.size();
-            for(int i=0; i<size; i++)
-            {
-                Node* temp = q.front();
-                q.pop();
-                if(i == size-1)
-                    temp->next = NULL;
-                else
-                    temp->next = q.front();
-                if(temp->left)
-                    q.push(temp->left);
-                if(temp->right)
-                    q.push(temp->right);
-            }
+        if(parent == NULL)
+            root->next = NULL;
+        //if root is left child of parent
+        else if(parent->left == root)
+            root->next = parent->right;
+        //if root is right child of parent
+        else if(parent->right == root) {
+            if(parent->next)
+                root->next = parent->next->left;
+            else
+                root->next = NULL;
         }
+        connect(root->left,root);
+        connect(root->right,root);
     }
 public:
     Node* connect(Node* root) {
-        bfs(root);
+        connect(root,NULL);
         return root;
     }
 };
