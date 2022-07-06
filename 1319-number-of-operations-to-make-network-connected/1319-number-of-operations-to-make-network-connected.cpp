@@ -24,19 +24,18 @@ public:
             adj[connections[i][1]].push_back(connections[i][0]);
         }
         vector<bool>visited(n,false);
-        int min_cables = 0,count=0;
+        int count=0;
         for(int i=0; i<n; i++) {
             if(!visited[i]) {
                 node_visited = 0;
                 dfs(visited,adj,i);
-                //cout<<i<<endl;
-                min_cables+=node_visited-1;
+                //min_cables+=node_visited-1;
                 count++;
             }
         }
-        int rem_cables = size - min_cables;
-        if(rem_cables < count-1)
-            return -1;
+        // int rem_cables = size - min_cables;
+        // if(rem_cables < count-1)
+        //     return -1;
         return count-1;
     }
 };
