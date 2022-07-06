@@ -59,7 +59,7 @@ public:
                     
                     if(!isValid(dx,dy,m,n))
                         continue;
-                    
+                    //found the second island
                     if(grid[dx][dy] == 1)
                         return d;
                     
