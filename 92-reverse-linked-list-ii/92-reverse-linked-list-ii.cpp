@@ -25,15 +25,6 @@ private:
         return head;
     }
     
-    void print(ListNode* head)
-    {
-        ListNode* temp = head;
-        while(temp) {
-            cout<<temp->val<<"-> ";
-            temp = temp->next;
-        }
-        cout<<"NULL\n";
-    }
 public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
         int count = 1;
