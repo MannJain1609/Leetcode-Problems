@@ -23,16 +23,7 @@ private:
             temp->next = r;
         return head;
     }
-    
-    void print(ListNode* head) {
-        ListNode* temp = head;
-        while(temp)
-        {
-            cout<<temp->val<<" ";
-            temp  = temp->next;
-        }
-        cout<<"NULL\n";
-    }
+
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
         if(k == 1 || head == NULL)
@@ -52,7 +43,6 @@ public:
                     temp->next = NULL;
                 }
                 r = reverseKGroup(r,k);
-                //print(r);
                 temp = reverse_ll(head,r);
                 break;
             }
