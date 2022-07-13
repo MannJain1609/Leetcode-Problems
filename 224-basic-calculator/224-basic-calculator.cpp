@@ -29,6 +29,7 @@ public:
             else if(s[i] == ')') {
                 res+=(int)num*sign;
                 num = 0;
+                sign = 1;
                 int Sign = nums.top();
                 nums.pop();
                 int Val = nums.top();
