@@ -33,8 +33,8 @@ public:
                     dp[j] = (2*dp[j-1]-dp[prv]+MOD)%MOD;
             }
             t.insert(s[j-1]);
-            if(dp[j]<0)
-                dp[j]+=MOD;
+            // if(dp[j]<0)
+            //     dp[j]+=MOD;
         }
         return (int)dp[n];
     }
