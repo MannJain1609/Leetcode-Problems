@@ -49,7 +49,7 @@ Expected Time Complexity: O(n2) <br>
 Expected Space Complexity: O(n)
  <br><br>
 
-Constraints:
+Constraints:<br>
 1 ≤ n ≤ 500 <br>
 1 ≤ nums[i] ≤ 1000 <br>
 max(nums[i]) ≤ k ≤ 2000 <br>
