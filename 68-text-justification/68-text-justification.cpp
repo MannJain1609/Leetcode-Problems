@@ -53,6 +53,8 @@ public:
         }
         
         //Last line case
+        //Adding one space in last line between words
+        //left justified
         string line = "";
         int c = 0;
         while(!q.empty())
@@ -61,6 +63,7 @@ public:
             c+= q.front().size() + 1;
             q.pop();
         }
+        //in case, last space exceeds the max count
         if(c>maxWidth)
             line.resize(line.size()-1);
         else if(c<maxWidth)
