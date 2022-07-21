@@ -8,18 +8,24 @@ public:
         for(string word : words)
         {
             int size = word.size();
+            //considering one space between words in width
             width+=size+1;
             if(width>maxWidth+1)
             {
                 width-= (size+1);
+                //calculating the req spaces by assuming one word
                 int req_spaces = maxWidth - width + 1;
+                //stores the extra spaces in case of not evenly distributed
+                //count is 1, extra spaces are zero
                 int extra = 0;
+                //if there are more than one word till now, update req_spaces and extra
                 if(count>1) {
                     req_spaces = (maxWidth - width + count)/(count-1);
                     extra = (maxWidth - width + count)%(count-1);
                 }
-                // cout<<req_spaces<<" ";
+                
                 string line = "";
+                //for count of characters in line
                 int c = 0;
                 
                 while(!q.empty())
@@ -38,14 +44,15 @@ public:
                     q.pop();
                 }
                 ans.push_back(line);
+                //initaialising for next line
                 width = size+1;
                 count = 0;
             }
             q.push(word);
             count++;
-            //cout<<word<<" "<<width<<endl;
         }
         
+        //Last line case
         string line = "";
         int c = 0;
         while(!q.empty())
