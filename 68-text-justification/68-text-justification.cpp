@@ -11,6 +11,9 @@ public:
             int size = word.size();
             //considering one space between words in width
             width+=size+1;
+            //As we are considering one space with each word, the condition for line
+            //must be width > maxwidth +1
+            //we will consider all the words before it, as this word cannot fit in line
             if(width>maxWidth+1)
             {
                 width-= (size+1);
@@ -49,6 +52,7 @@ public:
                 width = size+1;
                 count = 0;
             }
+
             q.push(word);
             count++;
         }
