@@ -5,6 +5,7 @@ public:
         vector<string>ans;
         int width = 0,count=0;
         queue<string>q;
+        
         for(string word : words)
         {
             int size = word.size();
