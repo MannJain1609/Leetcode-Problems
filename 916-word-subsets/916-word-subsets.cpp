@@ -9,9 +9,10 @@ public:
             for(char c: ss)
             {
                 count[c-'a']++;
+                maxB[c-'a'] = max(maxB[c-'a'],count[c-'a']);
             }
-            for(int i=0; i<26; i++)
-                maxB[i] = max(maxB[i],count[i]);
+            // for(int i=0; i<26; i++)
+            //     maxB[i] = max(maxB[i],count[i]);
         }
         
         for(string word : words1)
