@@ -34,12 +34,16 @@
 
 class Solution {
 public:
+     static bool cmp(const vector<int> &a, const vector<int>& b)
+    {
+        if(a[0]!=b[0])
+            return a[0] < b[0];
+        return a[1] > b[1];
+    }
     int numberOfWeakCharacters(vector<vector<int>>& properties) {
         // Sort in ascending order of attack, 
         // If attack is same sort in descending order of defense
-        sort(properties.begin(), properties.end(), 
-             [](const vector<int>& a, vector<int>& b) -> bool { 
-                 return (a[0] == b[0] ? a[1] > b[1] : a[0] < b[0]);});
+        sort(properties.begin(), properties.end(), cmp);
              
         int weakCharacters = 0;
         int maxDefense = 0;
