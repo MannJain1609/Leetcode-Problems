@@ -13,7 +13,7 @@ class Solution {
 private:
     
     int count = 0;
-    bool isPalindrome(int arr[10])
+    bool isPalindrome(vector<int>& arr)
     {
         int odds = 0;
         for(int i=0; i<10; i++)
@@ -25,7 +25,7 @@ private:
         }
         return true;
     }
-    void helper(TreeNode* root, int arr[10]) {
+    void helper(TreeNode* root, vector<int>& arr) {
         if(root == NULL)
         {
             return;
@@ -45,7 +45,8 @@ private:
     }
 public:
     int pseudoPalindromicPaths (TreeNode* root) {
-        int arr[10] = {0};
+        //int arr[10] = {0};
+        vector<int>arr(10,0);
         helper(root, arr);
         return count;
     }
