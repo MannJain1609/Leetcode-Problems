@@ -4,7 +4,7 @@ public:
         int size = queries.size();
         int n = nums.size();
         int sum = 0;
-        vector<int> ans;
+        vector<int> ans(size);
         
         for(int i=0; i<n; i++)
         {
@@ -13,14 +13,14 @@ public:
         }
         for(int i=0; i<size; i++)
         {
-            int ind = queries[i][1];
-            int val = queries[i][0];
+            const int ind = queries[i][1];
+            const int val = queries[i][0];
             if((nums[ind]&1) == 0)
                 sum-= nums[ind];
             nums[ind]+= val;
             if((nums[ind]&1) == 0)
                 sum+= nums[ind];
-            ans.push_back(sum);
+            ans[i] = sum;
         }
         return ans;
     }
