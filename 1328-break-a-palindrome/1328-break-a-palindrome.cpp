@@ -17,16 +17,7 @@ public:
                 return palindrome;
             }
         }
-        for(int i=len-1; i>=0; i--)
-        {
-            if(i == s)
-                continue;
-            if(palindrome[i]!= 'z')
-            {
-                palindrome[i]++;
-                return palindrome;
-            }
-        }
-        return "";
+        palindrome[len-1] = 'b';
+        return palindrome;
     }
 };
