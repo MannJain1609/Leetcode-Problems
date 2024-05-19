@@ -1,46 +1,95 @@
-int ans;
-class prop{
-public:
-    bool bst;       //to check if tree is bst
-    int ma;         //max value in a tree
-    int mi;         //min value in an tree
-    int ms;         //current maximum sum
-    prop(){
-        bst=true;
-        ma=INT_MIN;
-        mi=INT_MAX;
-        ms=0;
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+
+struct IndexedNode {
+    int sum,  Min, Max;
+    IndexedNode() {
+        this->sum = 0;
+        this->Min = 100000;
+        this->Max = -100000;
+    }
+    IndexedNode(int sum,int min,int max) {
+        this->sum =sum;
+        this->Min = min;
+        this->Max = max;
     }
 };
+
 class Solution {
 public:
-    prop calcSum(TreeNode* root){
-        if (root == NULL){
-            return prop();
+    int maxSum = 0;
+    IndexedNode* help(TreeNode* root)
+    {
+        if(root == NULL)
+            return new IndexedNode();
+
+        IndexedNode* left = help(root->left);
+        IndexedNode* right = help(root->right);
+        
+
+        if(left == NULL || right == NULL) {
+            return NULL;
         }
-        prop p;
-        prop pl = calcSum(root->left);                        //recursive call for left sub-tree
-        prop pr = calcSum(root->right);                       //recursive call for right sub-tree
-		
-		//if sub-tree including this node is bst
-        if ( pl.bst==true && pr.bst==true && root->val>pl.ma && root->val<pr.mi ){
-            p.bst = true;                                                      //current tree is a bst
-            p.ms = pl.ms + pr.ms + root->val;          
-            p.mi  = min(root->val, pl.mi);
-            p.ma = max(root->val, pr.ma);
+        
+         if(root->left == NULL && root->right == NULL)
+        {
+            maxSum = max(maxSum, root->val);
+            return new IndexedNode(root->val,root->val, root->val);
         }
-		//if current tree is not a bst
-        else {
-            p.bst=false;
-            p.ms=max(pl.ms, pr.ms);
+
+        if(root->val > left->Max && root->val < right->Min)
+        {
+            int sum = root->val + left->sum + right->sum;
+            maxSum = max(maxSum, sum);
+            int Min = min(root->val, left->Min);
+            int Max = max(root->val,right->Max);
+            IndexedNode* temp = new IndexedNode(sum,Min,Max);
+            return temp;
         }
-		
-        ans=max(ans, p.ms);
-        return p;
+        return NULL;   
+        
     }
-    int maxSumBST(TreeNode* root){
-        ans = 0;
-        calcSum(root);
-        return ans;
+
+    // int bstSum(TreeNode* root, int big, int small)
+    // {
+    //     if(root == NULL)
+    //         return 0;
+    //     if(root->val >= big || root->val <= small)
+    //         return INT_MIN;
+    //     if(root->left == NULL && root->right == NULL)
+    //         return root->val;
+    //     int t1 = bstSum(root->left, root->val,small);
+    //     int t2 = INT_MIN;
+    //     if(t1 != INT_MIN)
+    //         t2 = bstSum(root->right, big, root->val);
+    //     if(t2 == INT_MIN)
+    //         return INT_MIN;
+    //     return root->val + t1 + t2;
+    // }
+    // void helper(TreeNode* root)
+    // {
+    //     if(root == NULL)
+    //         return;
+        
+    //     helper(root->left);
+    //     helper(root->right);
+
+    //     int temp = bstSum(root,100000,-100000);
+    //     //cout<<temp<<endl;
+    //     maxSum = max(maxSum, temp);
+    // }
+    int maxSumBST(TreeNode* root) {
+        //helper(root);
+        help(root);
+        return maxSum;
     }
 };
